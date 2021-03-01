@@ -113,12 +113,14 @@ local devs = mtkwifi.get_all_devs()
                         </td>
                         <td style="text-align:right">
                             <input class="cbi-button cbi-button-reset" style="width:100px" title="禁用无线" value="禁用中继" type="button" onclick="location.href='<%=luci.dispatcher.build_url("admin", "network", "wifi", "vif_disable", dev.apcli.vifname)%>'" />
-                            <% if dev.apcli.status == "Connected" then %>
+                            
+			    <% if dev.apcli.status == "Connected" then %>
                             <input class="cbi-button cbi-button-remove" style="width:100px" title="重启无线" value="断开中继" type="button" onclick='wifi_reload("<%=luci.dispatcher.build_url("admin", "network", "wifi", "apcli_disconnect", dev.devname, dev.apcli.vifname)%>")' />
                             <% else %>
                             <input class="cbi-button cbi-button-reload" style="width:100px" title="重启无线" value="连接中继" type="button" onclick='wifi_reload("<%=luci.dispatcher.build_url("admin", "network", "wifi", "apcli_connect", dev.devname, dev.apcli.vifname)%>")' />
                             <% end %>
-                            <input class="cbi-button cbi-button-edit" style="width:100px" title="配置无线设置" value="中继设置" type="button" onclick="location.href='<%=luci.dispatcher.build_url("admin", "network", "wifi", "apcli_cfg_view", dev.devname, dev.apcli.vifname)%>'" />
+                            
+		            <input class="cbi-button cbi-button-edit" style="width:100px" title="配置无线设置" value="中继设置" type="button" onclick="location.href='<%=luci.dispatcher.build_url("admin", "network", "wifi", "apcli_cfg_view", dev.devname, dev.apcli.vifname)%>'" />
                         </td>
                     </tr>
                     <% end %>
