@@ -1084,6 +1084,6 @@ define Device/zte_e8820s
 	check-size
   DEVICE_VENDOR := ZTE
   DEVICE_MODEL := E8820S
-  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb3 wpad-openssl
+  DEVICE_PACKAGES := kmod-mt7603e kmod-mt76x2e kmod-usb3 luci-app-mtwifi
 endef
 TARGET_DEVICES += zte_e8820s
