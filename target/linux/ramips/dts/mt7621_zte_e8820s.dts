@@ -25,22 +25,22 @@
 
 		led_sys: sys {
 			label = "e8820s:white:sys";
-			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio0 16 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power: power {
 			label = "e8820s:white:power";
-			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;                                       
+			gpios = <&gpio0 3 GPIO_ACTIVE_LOW>;                                       
 		};
 
 		wlan2g {
 			label = "e8820s:white:wlan2g";
-			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan5g {
 			label = "e8820s:white:wlan5g";
-			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
 		};
 	};
 
@@ -49,19 +49,19 @@
 
 		reset {
 			label = "reset";
-			gpios = <&gpio 18 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio0 18 GPIO_ACTIVE_HIGH>;
 			linux,code = <KEY_RESTART>;
 		};
 
 		wps {
 			label = "wps";
-			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_WPS_BUTTON>;
 		};
 
 		wifi {
 			label = "wifi";
-			gpios = <&gpio 10 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_RFKILL>;
 		};
 	};
