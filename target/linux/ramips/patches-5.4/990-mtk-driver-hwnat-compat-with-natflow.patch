@@ -235,4 +235,3 @@ index 5548dbb..f3a479e 100644
  
  /* internal */
  int mtk_ppe_debugfs_init(struct mtk_ppe *ppe);
- 
