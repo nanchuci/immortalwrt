@@ -1508,6 +1508,8 @@ TARGET_DEVICES += zyxel_wap6805
 
 define Device/zte_e8820s
   $(Device/dsa-migration)
+  DEVICE_COMPAT_VERSION := 1.0
+  DEVICE_COMPAT_MESSAGE := Config is compat with swconfig  
   $(Device/uimage-lzma-loader)
   BLOCKSIZE := 128k
   PAGESIZE := 2048
