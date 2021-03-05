@@ -338,6 +338,8 @@ struct fe_rx_dma {
 #define TX_DMA_UDF		BIT(20)
 #define TX_DMA_CHKSUM		(0x7 << 29)
 #define TX_DMA_TSO		BIT(28)
+#define TX_DMA_FPORT_SHIFT	25
+#define TX_DMA_FPORT_MASK	0x7
 
 /* frame engine counters */
 #define FE_PPE_AC_BCNT0		(FE_CMTABLE_OFFSET + 0x00)
@@ -347,6 +349,11 @@ struct fe_rx_dma {
 /* phy device flags */
 #define FE_PHY_FLAG_PORT	BIT(0)
 #define FE_PHY_FLAG_ATTACH	BIT(1)
+
+/* natflow.h */
+#define HWNAT_QUEUE_MAPPING_MAGIC      0x8000
+#define HWNAT_QUEUE_MAPPING_MAGIC_MASK 0xe000
+#define HWNAT_QUEUE_MAPPING_HASH_MASK  0x1fff
 
 struct fe_tx_dma {
 	unsigned int txd1;
@@ -463,9 +470,15 @@ struct fe_rx_ring {
 	u16 rx_calc_idx;
 };
 
+enum fe_state_t {
+	__FE_DOWN,
+};
+
 struct fe_priv {
 	/* make sure that register operations are atomic */
 	spinlock_t			page_lock;
+
+	unsigned long state;
 
 	struct fe_soc_data		*soc;
 	struct net_device		*netdev;
@@ -518,6 +531,15 @@ static inline void *priv_netdev(struct fe_priv *priv)
 {
 	return (char *)priv - ALIGN(sizeof(struct net_device), NETDEV_ALIGN);
 }
+
+int ra_ppe_probe(struct fe_priv *eth);
+void ra_ppe_remove(struct fe_priv *eth);
+int mtk_flow_offload(struct fe_priv *eth,
+		     enum flow_offload_type type,
+		     struct flow_offload *flow,
+		     struct flow_offload_hw_path *src,
+		     struct flow_offload_hw_path *dest);
+int ra_offload_check_rx(struct fe_priv *eth, struct sk_buff *skb, u32 rxd4);
 
 
 #endif /* FE_ETH_H */
