@@ -1523,6 +1523,6 @@ define Device/zte_e8820s
   DEVICE_VENDOR := ZTE
   DEVICE_MODEL := E8820S
   DEVICE_PACKAGES := kmod-mt7603e kmod-mt76x2e luci-app-mtwifi kmod-usb3 \
-	kmod-natflow kmod-usb-ledtrig-usbport
+	kmod-usb-ledtrig-usbport
 endef
 TARGET_DEVICES += zte_e8820s
