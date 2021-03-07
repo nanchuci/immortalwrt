@@ -37,6 +37,21 @@
 		compatible = "mti,cpu-interrupt-controller";
 	};
 
+	reserved-memory {
+		#address-cells = <0x1>;
+		#size-cells = <0x1>;
+		ranges;
+
+		ramoops@3f00000 {
+			compatible = "ramoops";
+			reg = <0x3f00000 0x80000>;
+
+			record-size = <0x10000>;
+			console-size = <0x10000>;
+			ftrace-size = <0x20000>;
+		};
+	};
+
 	chosen {
 		bootargs = "console=ttyS0,57600";
 	};
@@ -438,14 +453,6 @@
 		clock-names = "nfi_clk";
 	};
 
-	crypto@1e004000 {
-		compatible = "mediatek,mtk-eip93";
-		reg = <0x1e004000 0x1000>;
-
-		interrupt-parent = <&gic>;
-		interrupts = <GIC_SHARED 19 IRQ_TYPE_LEVEL_HIGH>;
-	};
-
 	ethsys: syscon@1e000000 {
 		compatible = "mediatek,mt7621-ethsys",
 			     "syscon";
@@ -461,7 +468,7 @@
 		clock-names = "ethif";
 
 		#address-cells = <1>;
-		#size-cells = <0>;
+		#size-cells = <1>;
 
 		resets = <&rstctrl 6 &rstctrl 23>;
 		reset-names = "fe", "eth";
@@ -554,6 +561,16 @@
 					};
 				};
 			};
+		};
+
+		hnat: hnat@0 {
+			compatible = "mediatek,mt7623-hnat";
+			reg = <0 0x10000>;
+			mtketh-ppd = "eth0";
+			mtketh-lan = "eth0";
+			mtketh-wan = "eth0";
+			resets = <&rstctrl 0>;
+			reset-names = "mtketh";
 		};
 	};
 
