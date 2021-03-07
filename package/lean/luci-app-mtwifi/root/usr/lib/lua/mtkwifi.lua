@@ -825,8 +825,10 @@ end
 
 
 function mtkwifi.scan_ap(vifname)
+    os.execute("ifconfig "..vifname.." down")
+    os.execute("ifconfig "..vifname.." up")
     os.execute("iwpriv "..vifname.." set SiteSurvey=0")
-    os.execute("sleep 10") -- depends on your env
+    os.execute("sleep 4") -- depends on your env
     local scan_result = mtkwifi.read_pipe("iwpriv "..vifname.." get_site_survey 2>/dev/null")
 
     local aplist = {}
